@@ -17,8 +17,8 @@ class Article(models.Model):
         return self.title
 
 
-class Section(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Раздел')
+class Scope(models.Model):
+    topic = models.CharField(max_length=100, verbose_name='Раздел')
     main = models.BooleanField()
 
     def __str__(self):
@@ -28,4 +28,4 @@ class Section(models.Model):
 
 class AssignedTags(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    section = models.ForeignKey(Scope, on_delete=models.CASCADE)
