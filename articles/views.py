@@ -13,6 +13,7 @@ def articles_list(request):
     ordering = '-published_at'
     articles = Article.objects.order_by(ordering)
 
-    articles_list()
+    # articles_list()
+    context['object_list'] = articles
 
     return render(request, template, context)
