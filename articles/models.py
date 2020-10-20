@@ -21,6 +21,10 @@ class Scope(models.Model):
     topic = models.CharField(max_length=100, verbose_name='Раздел')
     main = models.BooleanField()
 
+    class Meta:
+        verbose_name = 'Раздел'
+        verbose_name_plural = 'Разделы'
+
     def __str__(self):
         main_str = 'main' if self.main else 'secondary'
         return f'{self.name}, {main_str}'
@@ -32,3 +36,7 @@ class AssignedTags(models.Model):
 
     def __str__(self):
         return f'Article {self.article}: {self.scope}'
+
+    class Meta:
+        verbose_name = 'Связанный раздел'
+        verbose_name_plural = 'Связанные разделы'
