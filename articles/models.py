@@ -29,13 +29,14 @@ class Scope(models.Model):
 
 
 class AssignedTags(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    scope = models.ForeignKey(Scope, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, related_name='assigned_tags', on_delete=models.CASCADE)
+    topic = models.ForeignKey(Scope, on_delete=models.CASCADE)
     is_main = models.BooleanField(verbose_name='Основной', default=False)
 
     def __str__(self):
-        return f'{self.article}: {self.scope}'
+        return f'{self.topic}'
 
     class Meta:
         verbose_name = 'Связанный раздел'
         verbose_name_plural = 'Связанные разделы'
+        ordering = ('-is_main', )
