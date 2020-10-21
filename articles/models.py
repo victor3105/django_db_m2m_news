@@ -18,24 +18,23 @@ class Article(models.Model):
 
 
 class Scope(models.Model):
-    topic = models.CharField(max_length=100, verbose_name='Раздел')
-    main = models.BooleanField()
+    topic = models.CharField(max_length=100, verbose_name='Название раздела')
 
     class Meta:
         verbose_name = 'Раздел'
         verbose_name_plural = 'Разделы'
 
     def __str__(self):
-        main_str = 'main' if self.main else 'secondary'
-        return f'{self.name}, {main_str}'
+        return f'{self.topic}'
 
 
 class AssignedTags(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     scope = models.ForeignKey(Scope, on_delete=models.CASCADE)
+    main = models.BooleanField(verbose_name='Основной', default=False)
 
     def __str__(self):
-        return f'Article {self.article}: {self.scope}'
+        return f'{self.article}: {self.scope}'
 
     class Meta:
         verbose_name = 'Связанный раздел'
